@@ -20,15 +20,11 @@ $info= filter_input(INPUT_POST, "info", FILTER_SANITIZE_SPECIAL_CHARS);
 $esborrar= filter_input(INPUT_POST, "borra", FILTER_SANITIZE_SPECIAL_CHARS);
 if ($info){
     echo "Informacio del usuari<br>";
-    echo "Nom del usuari: ". $_COOKIE['username'];
-    echo "<br>Hora de inico de sesion: ". $_COOKIE['Hora']."<br><br>";   
-    echo "
-    <iframe id='iframe'
-    title= ''
-    width='300'
-    height='200'
-    src='usuari.php'>
-</iframe> ";
+    echo "Nom del usuari: ".$_SESSION['usersession'];
+    echo "<br>Hora de inico de sesion: ". $_COOKIE['Hora']."<br><br>";  
+   
+
+    
     
 }else if($esborrar){
     setcookie("username",$username,time()-100,"/");
@@ -36,7 +32,19 @@ if ($info){
     header('location: login.php');
 }
 ?>
+<form action="index.php"  id="buscador" method="post">
+   <input type="text" name="url" id="buscar">
+   <input type="submit">
+   </form>
+<?php
+$urluser= filter_input(INPUT_POST, "url", FILTER_SANITIZE_SPECIAL_CHARS);
+echo "<iframe src='https://".$urluser."' width='500' height='500'></iframe>";
+?>
+
 </body>
 </html>
+
+
+
 
 
